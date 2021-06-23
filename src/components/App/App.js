@@ -1,12 +1,24 @@
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { theme } from 'styles/theme';
+import { GlobalStyle } from 'styles/globalStyle';
+import ProductsProvider from 'providers/ProductsProvider';
 import ListProducts from 'components/ListProducts/ListProducts';
-import './App.scss';
+import Basket from 'components/Basket/Basket';
+import TotalOrder from 'components/TotalOrder/TotalOrder';
 
 const App = () => {
   return (
-    <div className="container">
-      <ListProducts />
-    </div>
+    <ThemeProvider theme={theme}>
+      <ProductsProvider>
+        <GlobalStyle />
+        <div className="container">
+          <ListProducts />
+          <Basket />
+          <TotalOrder />
+        </div>
+      </ProductsProvider>
+    </ThemeProvider>
   );
 };
 

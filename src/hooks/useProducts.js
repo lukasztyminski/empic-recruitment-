@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { useCallback } from 'react';
 
-// const productsAPI = axios.create({});
+const productsAPI = axios.create({});
 
 export const useProducts = () => {
   const getProducts = useCallback(async () => {
     try {
-      const result = await axios.get('/api/cart');
+      const result = await productsAPI.get('/api/cart');
       return result.data;
     } catch (e) {
       console.log(e);

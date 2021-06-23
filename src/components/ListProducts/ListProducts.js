@@ -1,25 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { useProducts } from 'hooks/useProducts';
+import React, { useContext } from 'react';
 import SingleProduct from 'components/SingleProduct/SingleProduct';
+import { Title } from 'components/Title/Title';
+import { ProductsContext } from 'providers/ProductsProvider';
 
 const ListProducts = () => {
-  const [products, setProducts] = useState([]);
-  const { getProducts } = useProducts();
-
-  useEffect(() => {
-    (async () => {
-      const products = await getProducts();
-      setProducts(products);
-    })();
-  }, [getProducts]);
+  const { productsList: products } = useContext(ProductsContext);
 
   return (
-    <div>
-      <h3>Lista produktów</h3>
-      {products.map((productData) => (
-        <SingleProduct key={productData.pid} productData={productData} />
-      ))}
-    </div>
+    <>
+      <Title>Lista produktów</Title>
+      <ul>
+        {products.map((productData) => (
+          <SingleProduct key={productData.pid} productData={productData} />
+        ))}
+      </ul>
+    </>
   );
 };
 
