@@ -1,0 +1,15 @@
+{
+  "extends": ["react-app", "react-app/jest", "plugin:prettier/recommended", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["warn", { "singleQuote": true, "printWidth": 150 }],
+    "import/first": 0,
+    "import/no-anonymous-default-export": ["warn", { "allowObject": true }]
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parser": "babel-eslint"
+}
