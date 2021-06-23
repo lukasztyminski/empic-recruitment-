@@ -9,7 +9,7 @@ const ListProducts = () => {
   return (
     <>
       <Title>Lista produktów</Title>
-      <ul>
+      <ul className="list col">
         {products.map((productData) => (
           <SingleProduct key={productData.pid} productData={productData} />
         ))}

@@ -3,13 +3,13 @@ import { useProducts } from 'hooks/useProducts';
 
 export const ProductsContext = createContext({
   productsList: [],
-  addProduct: () => {},
-  deleteProduct: () => {},
+  setNumberOfProducts: () => {},
 });
 
 const ProductsProvider = ({ children }) => {
   const [productsList, setProductsList] = useState([]);
   const [totalOrderSum, setTotalOrderSum] = useState(0);
+
   const { getProducts } = useProducts();
 
   const prepareData = (products) =>
@@ -33,10 +33,10 @@ const ProductsProvider = ({ children }) => {
     }
   }, [productsList]);
 
-  const setNumberOfProducts = ({ pid, numberOfProducts }) => {
+  const setNumberOfProducts = ({ pid, quantityOfProducts }) => {
     setProductsList((prevState) =>
       prevState.map((product) =>
-        product.pid === pid ? { ...product, numberOfProducts, sumOfProducts: numberOfProducts * product.price } : { ...product }
+        product.pid === pid ? { ...product, quantityOfProducts, sumOfProducts: quantityOfProducts * product.price } : { ...product }
       )
     );
   };
