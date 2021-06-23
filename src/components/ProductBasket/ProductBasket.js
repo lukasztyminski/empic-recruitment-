@@ -1,16 +1,18 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import debounce from 'lodash/debounce';
 import { ProductsContext } from 'providers/ProductsProvider';
+import { Button } from 'components/Button/Button';
 import { productsAPI } from 'hooks/useProducts';
 import { API_PRODUCTS } from 'constants';
 import { ERROR_TYPE_PRODUCT_CHECK } from 'constants';
+import { ProductBasketWrapper, Name, Quantity, ButtonWrapper } from './ProductBasket.style';
 
 const { PRODUCT_CHECK } = API_PRODUCTS;
 const { INCORRECT_QUANTITY } = ERROR_TYPE_PRODUCT_CHECK;
 
 const ProductBasket = ({ product: { name, isBlocked, min, max, pid } }) => {
   const [quantityOfProducts, setQuantityOfProducts] = useState(min);
-  const { setNumberOfProducts, totalOrderSum } = useContext(ProductsContext);
+  const { setNumberOfProducts } = useContext(ProductsContext);
 
   useEffect(() => {
     if (quantityOfProducts !== min) {
@@ -49,15 +51,19 @@ const ProductBasket = ({ product: { name, isBlocked, min, max, pid } }) => {
   };
 
   return (
-    <div>
-      {name} | {`Obecnie masz ${quantityOfProducts} sztuk produktu`}
-      <button disabled={isBlocked} onClick={addProduct}>
-        +
-      </button>
-      <button disabled={isBlocked} onClick={removeProduct}>
-        -
-      </button>
-    </div>
+    <>
+      <ProductBasketWrapper>
+        <Name>{name}</Name>| <Quantity>{`Obecnie masz: ${quantityOfProducts} sztuk produktu`}</Quantity>
+        <ButtonWrapper>
+          <Button value={quantityOfProducts} disabled={isBlocked} onClick={addProduct}>
+            +
+          </Button>
+          <Button value={quantityOfProducts} disabled={isBlocked} onClick={removeProduct}>
+            -
+          </Button>
+        </ButtonWrapper>
+      </ProductBasketWrapper>
+    </>
   );
 };
 
