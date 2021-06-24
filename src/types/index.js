@@ -6,4 +6,5 @@ export const ProductShape = {
   price: PropTypes.number,
   max: PropTypes.number,
   min: PropTypes.number,
+  isBlocked: PropTypes.bool,
 };

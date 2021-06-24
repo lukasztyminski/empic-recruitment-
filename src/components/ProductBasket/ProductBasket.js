@@ -1,11 +1,13 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
 import { ProductsContext } from 'providers/ProductsProvider';
 import { Button } from 'components/Button/Button';
 import { productsAPI } from 'hooks/useProducts';
 import { API_PRODUCTS } from 'constants';
 import { ERROR_TYPE_PRODUCT_CHECK } from 'constants';
-import { ProductBasketWrapper, Name, Quantity, ButtonWrapper } from './ProductBasket.style';
+import { ProductBasketWrapper, TitleWrapper, Name, Quantity, ButtonWrapper } from './ProductBasket.style';
+import { ProductShape } from 'types';
 
 const { PRODUCT_CHECK } = API_PRODUCTS;
 const { INCORRECT_QUANTITY } = ERROR_TYPE_PRODUCT_CHECK;
@@ -31,7 +33,11 @@ const ProductBasket = ({ product: { name, isBlocked, min, max, pid } }) => {
             quantity,
           });
 
-          if (result.data.errorType === INCORRECT_QUANTITY) {
+          const {
+            data: { errorType, isError },
+          } = result;
+
+          if (isError && errorType === INCORRECT_QUANTITY) {
             setQuantityOfProducts(min);
           }
         } catch (e) {
@@ -52,19 +58,25 @@ const ProductBasket = ({ product: { name, isBlocked, min, max, pid } }) => {
 
   return (
     <>
-      <ProductBasketWrapper>
-        <Name>{name}</Name>| <Quantity>{`Obecnie masz: ${quantityOfProducts} sztuk produktu`}</Quantity>
+      <ProductBasketWrapper className="row">
+        <TitleWrapper>
+          <Name>{name}</Name>Obecnie masz:<Quantity>{quantityOfProducts}</Quantity>sztuk produktu
+        </TitleWrapper>
         <ButtonWrapper>
-          <Button value={quantityOfProducts} disabled={isBlocked} onClick={addProduct}>
+          <Button isBig value={quantityOfProducts} disabled={isBlocked} onClick={addProduct}>
             +
           </Button>
-          <Button value={quantityOfProducts} disabled={isBlocked} onClick={removeProduct}>
+          <Button isBig value={quantityOfProducts} disabled={isBlocked} onClick={removeProduct}>
             -
           </Button>
         </ButtonWrapper>
       </ProductBasketWrapper>
     </>
   );
+};
+
+ProductBasket.propTypes = {
+  product: PropTypes.shape(ProductShape),
 };
 
 export default ProductBasket;

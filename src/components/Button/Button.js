@@ -1,17 +1,30 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { mixinFlex } from 'helpers';
 
 export const Button = styled.button`
-  margin: 15px 0;
-  padding: ${({ isBig }) => (isBig ? '10px 38px' : '7px 10px')};
-  font-size: ${({ isBig, theme }) => (isBig ? theme.fontSize.m : theme.fontSize.s)};
-  background-color: ${({ theme }) => theme.colors.lightPurple};
-  border-radius: 50%;
+  padding: ${({ isBig }) => (isBig ? '10px 20px' : '7px 10px')};
+  font-size: ${({ isBig, theme }) => (isBig ? theme.fontSize.m : theme.fontSize.l)};
+  background-color: ${({ theme }) => theme.colors.darkPurple};
+  border-radius: 2rem;
+  ${mixinFlex('column', 'center', 'center')};
+  height: 2rem;
+  width: 2rem;
   border: none;
   font-weight: bold;
+  transition: 1s background ease-in-out;
+  cursor: pointer;
   color: ${({ theme }) => theme.colors.black};
-  background: ${({ theme, value }) => {
-    if (value > 9) return theme.colors.success;
-    if (value < 2) return theme.colors.error;
-    return theme.colors.grey;
-  }};
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.5;
+    `}
+  & + & {
+    margin-left: 0.5rem;
+  }
+  &:focus,
+  &:hover,
+  &:active {
+    background-color: ${({ theme }) => theme.colors.warning};
+  }
 `;

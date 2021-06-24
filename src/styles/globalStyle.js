@@ -18,7 +18,6 @@ export const GlobalStyle = createGlobalStyle`
 		-moz-osx-font-smoothing: grayscale;
 		color: ${({ theme }) => theme.colors.darkGrey};
 		letter-spacing: -0.02em;
-		overflow-y: hidden;
 	}
 
 	a, button {
