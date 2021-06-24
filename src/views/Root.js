@@ -6,7 +6,7 @@ import TotalOrder from 'components/TotalOrder/TotalOrder';
 
 const Root = () => {
   return (
-    <div className="container">
+    <div title="Test root" className="container">
       <ListProducts />
       <Basket />
       <TotalOrder />
