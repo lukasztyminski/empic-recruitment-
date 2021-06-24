@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-	@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 	html {
 		box-sizing: border-box;
@@ -18,7 +17,6 @@ export const GlobalStyle = createGlobalStyle`
 		-moz-osx-font-smoothing: grayscale;
 		color: ${({ theme }) => theme.colors.darkGrey};
 		letter-spacing: -0.02em;
-		overflow-y: hidden;
 	}
 
 	a, button {
