@@ -4,6 +4,6 @@ import Root from './Root';
 describe('Root component', () => {
   it('Renders the root component', () => {
     render(<Root />);
-    screen.getByLabelText('login');
+    screen.getByTitle('Test root');
   });
 });
